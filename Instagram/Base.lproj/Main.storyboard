@@ -178,7 +178,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3BY-YS-rfW">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="3BY-YS-rfW">
                                 <rect key="frame" x="16" y="56" width="115" height="113"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="113" id="Bbc-qt-bU0"/>
@@ -199,6 +199,7 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Mh4-L3-17L"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="2wm-rG-A7K" firstAttribute="leading" secondItem="3BY-YS-rfW" secondAttribute="trailing" constant="3" id="8xB-Jn-OQn"/>
                             <constraint firstItem="Mh4-L3-17L" firstAttribute="trailing" secondItem="2wm-rG-A7K" secondAttribute="trailing" constant="16" id="DBX-qZ-Huc"/>
@@ -206,13 +207,29 @@
                             <constraint firstItem="3BY-YS-rfW" firstAttribute="top" secondItem="Mh4-L3-17L" secondAttribute="top" id="R3X-iG-UfF"/>
                             <constraint firstItem="3BY-YS-rfW" firstAttribute="leading" secondItem="Mh4-L3-17L" secondAttribute="leading" constant="16" id="q8b-Y6-M6S"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="VaO-UC-XBg" appends="YES" id="9TH-ev-F38"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="nar-2d-5Cb">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="lB7-yM-DeB"/>
-                        <barButtonItem key="rightBarButtonItem" title="Share" id="C6M-D2-8GO"/>
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="lB7-yM-DeB">
+                            <connections>
+                                <action selector="cancelButton:" destination="zjx-4X-RCB" id="eYe-uF-HIc"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Share" id="C6M-D2-8GO">
+                            <connections>
+                                <action selector="shareButton:" destination="zjx-4X-RCB" id="lM4-FX-v9R"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="captionField" destination="2wm-rG-A7K" id="6fj-Rw-MZU"/>
+                        <outlet property="imgView" destination="3BY-YS-rfW" id="eWO-RV-07V"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fgz-VX-mGd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="VaO-UC-XBg"/>
             </objects>
             <point key="canvasLocation" x="2786.1538461538462" y="-19.194312796208528"/>
         </scene>
@@ -254,6 +271,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="image_placeholder" width="375" height="375"/>
         <image name="insta_camera_btn" width="25" height="25"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

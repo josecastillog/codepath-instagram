@@ -10,7 +10,6 @@
 #import <Parse/Parse.h>
 
 @interface HomeFeedViewController ()
-
 @end
 
 @implementation HomeFeedViewController
