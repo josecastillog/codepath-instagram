@@ -6,10 +6,14 @@
 //
 
 #import "HomeFeedViewController.h"
+#import "InstagramPostTableViewCell.h"
 #import "SceneDelegate.h"
 #import <Parse/Parse.h>
+#import "Post.h"
 
-@interface HomeFeedViewController ()
+@interface HomeFeedViewController () <UITableViewDataSource, UITableViewDelegate>
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) NSArray *arrayOfPosts;
 @end
 
 @implementation HomeFeedViewController
@@ -17,6 +21,31 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    [self query];
+}
+
+- (void)query {
+    PFQuery *postQuery = [Post query];
+    [postQuery orderByDescending:@"createdAt"];
+    [postQuery includeKey:@"author"];
+    [postQuery includeKey:@"image"];
+    [postQuery includeKey:@"caption"];
+    postQuery.limit = 20;
+
+    // fetch data asynchronously
+    [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
+        if (posts) {
+            NSLog(@"Succesfully retrieved posts");
+            self.arrayOfPosts = posts;
+            [self.tableView reloadData];
+        }
+        else {
+            NSLog(@"Error getting posts: %@", error.localizedDescription);
+        }
+    }];
 }
 
 - (IBAction)logout:(id)sender {
@@ -30,6 +59,18 @@
             myDelegate.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
         }
     }];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.arrayOfPosts.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    InstagramPostTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"PhotoCell"
+                                                                 forIndexPath:indexPath];
+    Post *post = self.arrayOfPosts[indexPath.row];
+    [cell setPost:post];
+    return cell;
 }
 
 /*

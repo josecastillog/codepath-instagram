@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		261A8F52286A68FB00E0E13A /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 261A8F51286A68FB00E0E13A /* Post.m */; };
+		261A8F57286A713600E0E13A /* InstagramPostTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 261A8F56286A713600E0E13A /* InstagramPostTableViewCell.m */; };
 		26B6BA14286A475000912724 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B6BA13286A475000912724 /* AppDelegate.m */; };
 		26B6BA17286A475000912724 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B6BA16286A475000912724 /* SceneDelegate.m */; };
 		26B6BA1D286A475000912724 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26B6BA1B286A475000912724 /* Main.storyboard */; };
@@ -45,6 +46,8 @@
 /* Begin PBXFileReference section */
 		261A8F50286A68FB00E0E13A /* Post.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Post.h; sourceTree = "<group>"; };
 		261A8F51286A68FB00E0E13A /* Post.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
+		261A8F55286A713600E0E13A /* InstagramPostTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InstagramPostTableViewCell.h; sourceTree = "<group>"; };
+		261A8F56286A713600E0E13A /* InstagramPostTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InstagramPostTableViewCell.m; sourceTree = "<group>"; };
 		26B6BA0F286A475000912724 /* Instagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		26B6BA12286A475000912724 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		26B6BA13286A475000912724 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -114,6 +117,15 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		261A8F54286A712000E0E13A /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				261A8F55286A713600E0E13A /* InstagramPostTableViewCell.h */,
+				261A8F56286A713600E0E13A /* InstagramPostTableViewCell.m */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		26B6BA06286A475000912724 = {
 			isa = PBXGroup;
 			children = (
@@ -139,6 +151,7 @@
 		26B6BA11286A475000912724 /* Instagram */ = {
 			isa = PBXGroup;
 			children = (
+				261A8F54286A712000E0E13A /* Cells */,
 				261A8F4F286A68F000E0E13A /* Models */,
 				26B6BA4A286A550000912724 /* ViewControllers */,
 				26B6BA12286A475000912724 /* AppDelegate.h */,
@@ -451,6 +464,7 @@
 				26B6BA53286A557B00912724 /* ComposeViewController.m in Sources */,
 				26B6BA25286A475100912724 /* main.m in Sources */,
 				26B6BA17286A475000912724 /* SceneDelegate.m in Sources */,
+				261A8F57286A713600E0E13A /* InstagramPostTableViewCell.m in Sources */,
 				261A8F52286A68FB00E0E13A /* Post.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
