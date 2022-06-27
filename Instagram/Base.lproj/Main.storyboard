@@ -137,7 +137,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Home Feed" id="pT3-RL-AQY">
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="cek-QG-M34"/>
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="pencil" catalog="system" id="xva-DQ-Veq">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="insta_camera_btn" id="xva-DQ-Veq">
                             <connections>
                                 <segue destination="lr4-XT-83Z" kind="presentation" id="oIp-PF-riB"/>
                             </connections>
@@ -232,7 +232,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="pencil" catalog="system" width="128" height="113"/>
+        <image name="insta_camera_btn" width="25" height="25"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
