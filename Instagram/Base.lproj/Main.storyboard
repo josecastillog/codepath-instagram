@@ -126,14 +126,14 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is a picture of whatever." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z2t-uj-vik">
-                                                    <rect key="frame" x="0.0" y="255" width="217" height="21"/>
+                                                    <rect key="frame" x="12" y="255" width="217" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="z2t-uj-vik" firstAttribute="leading" secondItem="I1x-MJ-IzU" secondAttribute="leading" id="AcK-YL-14I"/>
+                                                <constraint firstItem="z2t-uj-vik" firstAttribute="leading" secondItem="I1x-MJ-IzU" secondAttribute="leading" constant="12" id="AcK-YL-14I"/>
                                                 <constraint firstAttribute="bottom" secondItem="z2t-uj-vik" secondAttribute="bottom" constant="17" id="KnN-zC-pmn"/>
                                                 <constraint firstItem="tLu-IG-s4A" firstAttribute="top" secondItem="I1x-MJ-IzU" secondAttribute="top" id="Tad-si-uus"/>
                                                 <constraint firstItem="tLu-IG-s4A" firstAttribute="leading" secondItem="I1x-MJ-IzU" secondAttribute="leading" id="Ttt-Ab-cgH"/>

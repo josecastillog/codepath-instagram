@@ -14,6 +14,7 @@
 @interface HomeFeedViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSArray *arrayOfPosts;
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
 @end
 
 @implementation HomeFeedViewController
@@ -25,6 +26,9 @@
     self.tableView.dataSource = self;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     [self query];
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(query) forControlEvents:UIControlEventValueChanged];
+    [self.tableView insertSubview:self.refreshControl atIndex:0];
 }
 
 - (void)query {
@@ -41,6 +45,7 @@
             NSLog(@"Succesfully retrieved posts");
             self.arrayOfPosts = posts;
             [self.tableView reloadData];
+            [self.refreshControl endRefreshing];
         }
         else {
             NSLog(@"Error getting posts: %@", error.localizedDescription);
