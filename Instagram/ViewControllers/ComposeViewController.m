@@ -60,7 +60,7 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (IBAction)shareButton:(id)sender {
+- (IBAction)didTapShare:(id)sender {
     NSString *caption = self.captionField.text;
     
     [Post postUserImage:self.uploadImage withCaption:caption withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
@@ -68,6 +68,7 @@
             NSLog(@"Error posting: %@", error.localizedDescription);
         } else {
             NSLog(@"Successfully uploaded image");
+            [self.delegate didPost];
             [self dismissViewControllerAnimated:YES completion:nil];
         }
     }];

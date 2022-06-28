@@ -33,4 +33,9 @@
     [self.photoImageView loadInBackground];
 }
 
+- (IBAction)didTapLike:(id)sender {
+    NSLog(@"Tapped like");
+    [self.likeButton setImage:[UIImage systemImageNamed:@"heart.fill"] forState:UIControlStateNormal];
+}
+
 @end

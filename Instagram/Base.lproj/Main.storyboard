@@ -134,6 +134,9 @@
                                                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain" image="heart" catalog="system" title=""/>
+                                                    <connections>
+                                                        <action selector="didTapLike:" destination="C4A-ie-t08" eventType="touchUpInside" id="7y2-fa-Y8l"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Liked by 12" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dj8-YD-wyp">
                                                     <rect key="frame" x="20" y="281" width="350" height="18"/>
@@ -197,6 +200,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="captionLabel" destination="MMk-CH-m2H" id="pBy-Jj-DDa"/>
+                                            <outlet property="likeButton" destination="T0I-eK-aC0" id="rp6-Dp-C2a"/>
                                             <outlet property="likesLabel" destination="dj8-YD-wyp" id="Fax-Q8-SzY"/>
                                             <outlet property="photoImageView" destination="tLu-IG-s4A" id="VOW-Vq-5Sx"/>
                                             <outlet property="timestampLabel" destination="bfJ-Bc-q5m" id="bhn-Sm-0gC"/>
@@ -223,7 +227,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="insta_camera_btn" id="XAq-b4-LAl">
                             <connections>
-                                <segue destination="lr4-XT-83Z" kind="presentation" id="cec-It-kZF"/>
+                                <segue destination="lr4-XT-83Z" kind="presentation" identifier="compose" id="cec-It-kZF"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -414,7 +418,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Share" id="C6M-D2-8GO">
                             <connections>
-                                <action selector="shareButton:" destination="zjx-4X-RCB" id="lM4-FX-v9R"/>
+                                <action selector="didTapShare:" destination="zjx-4X-RCB" id="TOE-ie-2Ln"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

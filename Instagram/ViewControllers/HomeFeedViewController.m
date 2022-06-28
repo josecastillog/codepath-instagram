@@ -10,9 +10,10 @@
 #import "SceneDelegate.h"
 #import "Post.h"
 #import "DetailsViewController.h"
+#import "ComposeViewController.h"
 #import <Parse/Parse.h>
 
-@interface HomeFeedViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface HomeFeedViewController () <UITableViewDataSource, UITableViewDelegate, ComposeViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSArray *arrayOfPosts;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
@@ -55,7 +56,7 @@
     }];
 }
 
-- (IBAction)logout:(id)sender {
+- (IBAction)didTaplogout:(id)sender {
     [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
         if (error) {
             NSLog(@"Error: %@", error.localizedDescription);
@@ -80,6 +81,10 @@
     return cell;
 }
 
+- (void)didPost {
+    [self query];
+}
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -92,6 +97,11 @@
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         Post *dataToPass = self.arrayOfPosts[indexPath.row];
         detailsController.post = dataToPass;
+    }
+    if ([[segue identifier] isEqualToString:@"compose"]) {
+        UINavigationController *navigationController = [segue destinationViewController];
+        ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
+        composeController.delegate = self;
     }
 }
 
