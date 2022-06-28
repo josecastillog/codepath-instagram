@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface InstagramPostTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *captionLabel;
 @property (strong, nonatomic) IBOutlet PFImageView *photoImageView;
+@property (weak, nonatomic) IBOutlet UILabel *timestampLabel;
+@property (weak, nonatomic) IBOutlet UILabel *likesLabel;
 @property (strong, nonatomic) Post *post;
 @end
 
