@@ -8,8 +8,9 @@
 #import "HomeFeedViewController.h"
 #import "InstagramPostTableViewCell.h"
 #import "SceneDelegate.h"
-#import <Parse/Parse.h>
 #import "Post.h"
+#import "DetailsViewController.h"
+#import <Parse/Parse.h>
 
 @interface HomeFeedViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -37,6 +38,7 @@
     [postQuery includeKey:@"author"];
     [postQuery includeKey:@"image"];
     [postQuery includeKey:@"caption"];
+    [postQuery includeKey:@"createdAt"];
     postQuery.limit = 20;
 
     // fetch data asynchronously
@@ -78,14 +80,19 @@
     return cell;
 }
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([[segue identifier] isEqualToString:@"details"]) {
+        UINavigationController *navigationController = [segue destinationViewController];
+        DetailsViewController *detailsController = (DetailsViewController*)navigationController.topViewController;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+        Post *dataToPass = self.arrayOfPosts[indexPath.row];
+        detailsController.post = dataToPass;
+    }
 }
-*/
 
 @end
