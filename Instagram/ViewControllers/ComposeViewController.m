@@ -8,7 +8,7 @@
 #import "ComposeViewController.h"
 #import "Post.h"
 
-@interface ComposeViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate>
+@interface ComposeViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate, UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imgView;
 @property (weak, nonatomic) IBOutlet UITextView *captionField;
 @property (strong, nonatomic) UIImage *uploadImage;
@@ -19,6 +19,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.captionField.delegate = self;
     self.imgView.userInteractionEnabled = YES;
     UITapGestureRecognizer *tapGesture1 = [[UITapGestureRecognizer alloc] initWithTarget:self  action:@selector(tapGesture:)];
     tapGesture1.numberOfTapsRequired = 1;
@@ -74,6 +75,11 @@
             [self dismissViewControllerAnimated:YES completion:nil];
         }
     }];
+}
+
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    self.captionField.text = @"";
+    self.captionField.textColor = [UIColor blackColor];
 }
 
 /*
