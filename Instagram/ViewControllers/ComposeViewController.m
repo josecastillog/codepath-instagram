@@ -12,6 +12,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imgView;
 @property (weak, nonatomic) IBOutlet UITextView *captionField;
 @property (strong, nonatomic) UIImage *uploadImage;
+@property (strong, nonatomic) NSArray *arrayOfLikes;
 @end
 
 @implementation ComposeViewController
@@ -23,6 +24,7 @@
     tapGesture1.numberOfTapsRequired = 1;
     tapGesture1.delegate = self;
     [self.imgView addGestureRecognizer:tapGesture1];
+    self.arrayOfLikes = PFUser.currentUser[@"arrayOfLikes"];
 }
 
 - (IBAction)cancelButton:(id)sender {

@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *likesLabel;
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
 @property (strong, nonatomic) Post *post;
+@property (strong, nonatomic) NSArray *arrayOfLikes;
 @end
 
 NS_ASSUME_NONNULL_END

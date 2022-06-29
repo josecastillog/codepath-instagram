@@ -35,6 +35,16 @@
 
 - (IBAction)didTapLike:(id)sender {
     NSLog(@"Tapped like");
+    NSLog(@"%@", self.post.objectId);
+    [self.arrayOfLikes arrayByAddingObject:self.post.objectId];
+    
+    int likes = [self.post.likeCount intValue];
+    likes += 1;
+    self.post.likeCount = [NSNumber numberWithInt:likes];
+    [self.post saveInBackground];
+    
+    // [PFUser.currentUser setObject:self.arrayOfLikes forKey:@"arrayOfLikes"];
+    // [PFUser.currentUser saveInBackground];
     [self.likeButton setImage:[UIImage systemImageNamed:@"heart.fill"] forState:UIControlStateNormal];
 }
 

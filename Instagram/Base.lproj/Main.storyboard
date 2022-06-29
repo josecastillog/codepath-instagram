@@ -16,12 +16,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o5O-nG-2SB">
-                                <rect key="frame" x="140" y="240" width="111" height="60"/>
-                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="50"/>
-                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1we-Yd-WxN">
                                 <rect key="frame" x="47" y="319" width="296" height="34"/>
                                 <constraints>
@@ -68,6 +62,12 @@
                                     <action selector="loginUser:" destination="2zt-YZ-YDW" eventType="touchUpInside" id="TdM-JP-GMh"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Instagram" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o5O-nG-2SB">
+                                <rect key="frame" x="96" y="240" width="198" height="60"/>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="50"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="oWQ-ia-E39"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -82,9 +82,10 @@
                             <constraint firstItem="nfE-Va-pTa" firstAttribute="leading" secondItem="oWQ-ia-E39" secondAttribute="leading" constant="47" id="RCV-3N-gtE"/>
                             <constraint firstItem="oWQ-ia-E39" firstAttribute="trailing" secondItem="IXb-FM-S6g" secondAttribute="trailing" constant="47" id="bvd-rK-Vje"/>
                             <constraint firstItem="JUW-Ub-9sz" firstAttribute="top" secondItem="1we-Yd-WxN" secondAttribute="bottom" constant="8" symbolic="YES" id="dr2-U3-L2F"/>
-                            <constraint firstItem="o5O-nG-2SB" firstAttribute="leading" secondItem="oWQ-ia-E39" secondAttribute="leading" constant="140" id="jJI-aV-FGr"/>
+                            <constraint firstItem="oWQ-ia-E39" firstAttribute="trailing" secondItem="o5O-nG-2SB" secondAttribute="trailing" constant="96" id="hdw-dD-XYi"/>
                             <constraint firstItem="nfE-Va-pTa" firstAttribute="top" secondItem="2pa-uT-Ety" secondAttribute="bottom" constant="41" id="lCg-mL-BNO"/>
                             <constraint firstItem="oWQ-ia-E39" firstAttribute="trailing" secondItem="JUW-Ub-9sz" secondAttribute="trailing" constant="47" id="mMV-lV-682"/>
+                            <constraint firstItem="o5O-nG-2SB" firstAttribute="leading" secondItem="oWQ-ia-E39" secondAttribute="leading" constant="96" id="p1d-Xb-GtV"/>
                             <constraint firstItem="JUW-Ub-9sz" firstAttribute="leading" secondItem="oWQ-ia-E39" secondAttribute="leading" constant="47" id="tif-j4-P09"/>
                             <constraint firstItem="oWQ-ia-E39" firstAttribute="trailing" secondItem="2pa-uT-Ety" secondAttribute="trailing" constant="47" id="xxW-Kf-rLm"/>
                         </constraints>
@@ -222,7 +223,7 @@
                     <navigationItem key="navigationItem" title="Home Feed" id="pT3-RL-AQY">
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="cek-QG-M34">
                             <connections>
-                                <action selector="logout:" destination="UJv-aw-YRT" id="L9Y-zH-BUQ"/>
+                                <action selector="didTaplogout:" destination="UJv-aw-YRT" id="u5B-wK-D7i"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="insta_camera_btn" id="XAq-b4-LAl">
@@ -367,7 +368,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dzD-Mw-sB0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1914" y="717"/>
+            <point key="canvasLocation" x="4645" y="718"/>
         </scene>
         <!--Compose View Controller-->
         <scene sceneID="drd-fD-eDh">
@@ -450,6 +451,44 @@
             </objects>
             <point key="canvasLocation" x="3715.3846153846152" y="-19.194312796208528"/>
         </scene>
+        <!--Profile-->
+        <scene sceneID="LhH-O8-Jgv">
+            <objects>
+                <viewController id="VNV-44-j17" customClass="ProfileViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="LfI-7f-aHo" customClass="Professional">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="image_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="6aG-oA-V4i" customClass="PFImageView">
+                                <rect key="frame" x="30" y="88" width="128" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Jose Castillo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IAX-Wg-yGg">
+                                <rect key="frame" x="46" y="236" width="97" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6hd-Dy-sQL"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <gestureRecognizers/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="jdx-MK-f7N" appends="YES" id="zAp-pY-zhS"/>
+                        </connections>
+                    </view>
+                    <navigationItem key="navigationItem" title="Profile" id="KJe-Yh-Jjw"/>
+                    <connections>
+                        <outlet property="imgView" destination="6aG-oA-V4i" id="GTf-zC-Xj0"/>
+                        <outlet property="userLabel" destination="IAX-Wg-yGg" id="RfY-AO-obq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pKp-qO-p7n" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="jdx-MK-f7N"/>
+            </objects>
+            <point key="canvasLocation" x="1913.8461538461538" y="760.66350710900474"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="TFE-VN-l2F">
             <objects>
@@ -466,7 +505,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aLl-ZD-5DJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1006" y="717"/>
+            <point key="canvasLocation" x="3771" y="718"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="hSe-5g-ba7">
@@ -480,6 +519,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="B85-UB-YuL" kind="relationship" relationship="viewControllers" id="Q3n-D2-cxU"/>
+                        <segue destination="GJu-g8-gfz" kind="relationship" relationship="viewControllers" id="Q6b-pO-GHI"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9LN-NN-RgQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -505,6 +545,25 @@
             </objects>
             <point key="canvasLocation" x="1913.8461538461538" y="-19.194312796208528"/>
         </scene>
+        <!--Profile-->
+        <scene sceneID="b6e-3W-KCh">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GJu-g8-gfz" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Profile" image="profile_tab" selectedImage="profile_tab" id="anK-35-6wJ"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="zZM-1u-VXj">
+                        <rect key="frame" x="0.0" y="44" width="390" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="VNV-44-j17" kind="relationship" relationship="rootViewController" id="U3l-2q-ErT"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ai0-Tl-N6a" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="984.61538461538453" y="760.66350710900474"/>
+        </scene>
     </scenes>
     <resources>
         <image name="chevron.backward" catalog="system" width="96" height="128"/>
@@ -514,6 +573,7 @@
         <image name="insta_camera_btn" width="25" height="25"/>
         <image name="message" catalog="system" width="128" height="113"/>
         <image name="paperplane" catalog="system" width="128" height="118"/>
+        <image name="profile_tab" width="25" height="25"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
