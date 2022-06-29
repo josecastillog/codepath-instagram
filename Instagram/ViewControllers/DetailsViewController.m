@@ -9,7 +9,7 @@
 #import "DateTools.h"
 
 @interface DetailsViewController ()
-@property (weak, nonatomic) IBOutlet UIImageView *imgView;
+@property (weak, nonatomic) IBOutlet PFImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
 @property (weak, nonatomic) IBOutlet UILabel *likeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *captionLabel;
@@ -36,11 +36,17 @@
 - (void)setPost {
     self.userLabel.text = self.post.author.username;
     self.photoImageView.file = self.post.image;
+    [self.photoImageView loadInBackground];
+    self.profileImageView.file = self.post.author[@"profileImage"];
+    [self.profileImageView loadInBackground];
+    self.profileImageView.userInteractionEnabled = YES;
+    self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.height/2;
+    self.profileImageView.layer.borderWidth = 0;
+    self.profileImageView.clipsToBounds = YES;
     self.captionLabel.text = self.post.caption;
     NSString *date = [NSDate shortTimeAgoSinceDate:self.post.createdAt];
     NSString *dateFormated = [date stringByAppendingString:@" ago"];
     self.timestampLabel.text = dateFormated;
-    [self.photoImageView loadInBackground];
 }
 
 

@@ -25,12 +25,26 @@
     _post = post;
     self.photoImageView.file = post.image;
     self.captionLabel.text = post.caption;
+    self.userLabel.text = post.author.username;
     NSString *likeCount = [NSString stringWithFormat:@"%@", self.post.likeCount];;
     self.likesLabel.text = [@"Liked by " stringByAppendingString:likeCount];
     NSString *date = [NSDate shortTimeAgoSinceDate:self.post.createdAt];
     NSString *dateFormated = [date stringByAppendingString:@" ago"];
     self.timestampLabel.text = dateFormated;
     [self.photoImageView loadInBackground];
+    [self setProfileImage];
+}
+
+- (void)setProfileImage {
+    self.profileImageView.userInteractionEnabled = YES;
+    self.profileImageView.layer.backgroundColor=[[UIColor clearColor] CGColor];
+    self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.height/2;
+    self.profileImageView.layer.borderWidth = 0;
+    self.profileImageView.clipsToBounds = YES;
+    if (self.post.author[@"profileImage"]) {
+        self.profileImageView.file = self.post.author[@"profileImage"];
+        [self.profileImageView loadInBackground];
+    }
 }
 
 - (IBAction)didTapLike:(id)sender {
