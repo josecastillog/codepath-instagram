@@ -13,12 +13,22 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    UITapGestureRecognizer *profileTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didTapUserProfile:)];
+    [self.profileImageView addGestureRecognizer:profileTapGestureRecognizer];
+    [self.userLabel addGestureRecognizer:profileTapGestureRecognizer];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+-(void)tapGesture: (id)sender {
+    UIImagePickerController *imagePickerVC = [UIImagePickerController new];
+    imagePickerVC.delegate = self;
+    imagePickerVC.allowsEditing = YES;
+    NSLog(@"Did tap");
 }
 
 - (void)setPost:(Post *)post {
@@ -45,6 +55,11 @@
         self.profileImageView.file = self.post.author[@"profileImage"];
         [self.profileImageView loadInBackground];
     }
+}
+
+-(void)didTapUserProfile:(UITapGestureRecognizer *)sender {
+    NSLog(@"DidTap");
+    [self.delegate postCell:self didTap:self.post];
 }
 
 - (IBAction)didTapLike:(id)sender {

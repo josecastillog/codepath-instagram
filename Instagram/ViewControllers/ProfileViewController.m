@@ -23,6 +23,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    if (self.user == nil) {
+        self.user = PFUser.currentUser;
+    }
     // Do any additional setup after loading the view.
     UITapGestureRecognizer *tapGesture1 = [[UITapGestureRecognizer alloc] initWithTarget:self  action:@selector(tapGesture:)];
     tapGesture1.numberOfTapsRequired = 1;
@@ -35,21 +38,21 @@
     self.imgView.layer.cornerRadius = self.imgView.frame.size.height/2;
     self.imgView.layer.borderWidth = 0;
     self.imgView.clipsToBounds = YES;
-    self.userLabel.text = PFUser.currentUser.username;
+    self.userLabel.text = self.user.username;
     [self setProfileImage];
     [self userPostsQuery];
 }
 
 - (void)setProfileImage {
     if (PFUser.currentUser[@"profileImage"]) {
-        self.imgView.file = PFUser.currentUser[@"profileImage"];
+        self.imgView.file = self.user[@"profileImage"];
         [self.imgView loadInBackground];
     }
 }
 
 -(void)userPostsQuery {
     PFQuery *postQuery = [Post query];
-    [postQuery whereKey:@"author" equalTo:PFUser.currentUser];
+    [postQuery whereKey:@"author" equalTo:self.user];
     [postQuery orderByDescending:@"createdAt"];
     [postQuery includeKey:@"image"];
     [postQuery includeKey:@"caption"];
@@ -110,8 +113,8 @@
 
     // Do something with the images (based on your use case)
     [self.imgView setImage:editedImage];
-    [PFUser.currentUser setObject:[self getPFFileFromImage:editedImage] forKey:@"profileImage"];
-    [PFUser.currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+    [self.user setObject:[self getPFFileFromImage:editedImage] forKey:@"profileImage"];
+    [self.user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (error) {
             NSLog(@"Error uploading image: %@", error.localizedDescription);
         }

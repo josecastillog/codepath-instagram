@@ -11,7 +11,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface InstagramPostTableViewCell : UITableViewCell
+@protocol PostCellDelegate;
+
+@interface InstagramPostTableViewCell : UITableViewCell <UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *captionLabel;
 @property (strong, nonatomic) IBOutlet PFImageView *photoImageView;
 @property (strong, nonatomic) IBOutlet PFImageView *profileImageView;
@@ -21,7 +23,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) Post *post;
 @property (strong, nonatomic) NSArray *arrayOfLikes;
 @property (weak, nonatomic) IBOutlet UILabel *userLabel;
+@property (weak, nonatomic) id<PostCellDelegate> delegate;
+@end
 
+@protocol PostCellDelegate
+- (void)postCell:(InstagramPostTableViewCell *) postCell didTap: (Post *)post;
 @end
 
 NS_ASSUME_NONNULL_END

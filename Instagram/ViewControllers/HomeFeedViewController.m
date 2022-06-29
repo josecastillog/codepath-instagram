@@ -11,9 +11,10 @@
 #import "Post.h"
 #import "DetailsViewController.h"
 #import "ComposeViewController.h"
+#import "ProfileViewController.h"
 #import <Parse/Parse.h>
 
-@interface HomeFeedViewController () <UITableViewDataSource, UITableViewDelegate, ComposeViewControllerDelegate>
+@interface HomeFeedViewController () <UITableViewDataSource, UITableViewDelegate, ComposeViewControllerDelegate, PostCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSArray *arrayOfPosts;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
@@ -77,12 +78,18 @@
     InstagramPostTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"PhotoCell"
                                                                  forIndexPath:indexPath];
     Post *post = self.arrayOfPosts[indexPath.row];
+    cell.delegate = self;
     [cell setPost:post];
     return cell;
 }
 
 - (void)didPost {
     [self query];
+}
+
+- (void)postCell:(InstagramPostTableViewCell *) postCell didTap: (Post *)post {
+    NSLog(@"HomeFeed");
+    [self performSegueWithIdentifier:@"profileSegue" sender:post];
 }
 
 #pragma mark - Navigation
@@ -102,6 +109,12 @@
         UINavigationController *navigationController = [segue destinationViewController];
         ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
         composeController.delegate = self;
+    }
+    if ([[segue identifier] isEqualToString:@"profileSegue"]) {
+        UINavigationController *navigationController = [segue destinationViewController];
+        ProfileViewController *profileController = (ProfileViewController*)navigationController.topViewController;
+        Post *dataToPass = sender;
+        profileController.user = dataToPass.author;
     }
 }
 
