@@ -6,12 +6,17 @@
 //
 
 #import "ProfileViewController.h"
+#import "ImageCell.h"
+#import "Post.h"
 #import <Parse/Parse.h>
 @import Parse;
 
-@interface ProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate>
+@interface ProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
 @property (strong, nonatomic) IBOutlet PFImageView *imgView;
 @property (weak, nonatomic) IBOutlet UILabel *userLabel;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (weak, nonatomic) IBOutlet UICollectionViewFlowLayout *flowLayout;
+@property (strong, nonatomic) NSArray *arrayOfPosts;
 @property (strong, nonatomic) PFUser *user;
 @end
 
@@ -20,17 +25,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.imgView.userInteractionEnabled = YES;
     UITapGestureRecognizer *tapGesture1 = [[UITapGestureRecognizer alloc] initWithTarget:self  action:@selector(tapGesture:)];
     tapGesture1.numberOfTapsRequired = 1;
     tapGesture1.delegate = self;
+    self.collectionView.delegate = self;
+    self.collectionView.dataSource = self;
     [self.imgView addGestureRecognizer:tapGesture1];
+    self.imgView.userInteractionEnabled = YES;
     self.imgView.layer.backgroundColor=[[UIColor clearColor] CGColor];
     self.imgView.layer.cornerRadius = self.imgView.frame.size.height/2;
     self.imgView.layer.borderWidth = 0;
     self.imgView.clipsToBounds = YES;
     self.userLabel.text = PFUser.currentUser.username;
     [self profileImageQuery];
+    [self userPostsQuery];
 }
 
 - (void)setProfileImage {
@@ -53,6 +61,28 @@
             NSLog(@"Succesfully retrieved user");
             self.user = objects[0];
             [self setProfileImage];
+        }
+    }];
+}
+
+-(void)userPostsQuery {
+    PFQuery *postQuery = [Post query];
+    [postQuery whereKey:@"author" equalTo:PFUser.currentUser];
+    [postQuery orderByDescending:@"createdAt"];
+    [postQuery includeKey:@"image"];
+    [postQuery includeKey:@"caption"];
+    [postQuery includeKey:@"createdAt"];
+    // postQuery.limit = 20;
+
+    // fetch data asynchronously
+    [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
+        if (posts) {
+            NSLog(@"Succesfully retrieved posts");
+            self.arrayOfPosts = posts;
+            [self.collectionView reloadData];
+        }
+        else {
+            NSLog(@"Error getting posts: %@", error.localizedDescription);
         }
     }];
 }
@@ -107,6 +137,28 @@
     
     // Dismiss UIImagePickerController to go back to your original view controller
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.arrayOfPosts.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    ImageCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ImageCell" forIndexPath:indexPath];
+    Post *post = self.arrayOfPosts[indexPath.row];
+    [cell setPost:post];
+    return cell;
+}
+
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    self.flowLayout.minimumLineSpacing = 0.5;
+    self.flowLayout.minimumInteritemSpacing = 0;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    // return CGSizeMake(self.view.frame.size.width/3, 128);
+    return CGSizeMake(self.view.frame.size.width/3, 128);
 }
 
 /*

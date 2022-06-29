@@ -5,6 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -185,6 +186,7 @@
                                                 <constraint firstItem="tLu-IG-s4A" firstAttribute="leading" secondItem="I1x-MJ-IzU" secondAttribute="leading" id="9lh-kz-GRM"/>
                                                 <constraint firstItem="MMk-CH-m2H" firstAttribute="leading" secondItem="I1x-MJ-IzU" secondAttribute="leadingMargin" id="Bfo-ly-Biz"/>
                                                 <constraint firstAttribute="trailing" secondItem="tLu-IG-s4A" secondAttribute="trailing" id="GME-EF-JxR"/>
+                                                <constraint firstItem="bfJ-Bc-q5m" firstAttribute="leading" secondItem="MMk-CH-m2H" secondAttribute="leading" id="KDs-Ki-dOa"/>
                                                 <constraint firstItem="dj8-YD-wyp" firstAttribute="trailing" secondItem="I1x-MJ-IzU" secondAttribute="trailingMargin" id="M1F-01-ora"/>
                                                 <constraint firstItem="Evm-f2-qJk" firstAttribute="top" secondItem="tLu-IG-s4A" secondAttribute="bottom" constant="3.6699999999999999" id="MHz-dS-uuT"/>
                                                 <constraint firstItem="tLu-IG-s4A" firstAttribute="top" secondItem="I1x-MJ-IzU" secondAttribute="top" id="MRd-Yi-mZG"/>
@@ -196,7 +198,6 @@
                                                 <constraint firstItem="Evm-f2-qJk" firstAttribute="leading" secondItem="T0I-eK-aC0" secondAttribute="trailing" constant="16" id="mPb-wp-qb5"/>
                                                 <constraint firstItem="bIj-X0-EJ6" firstAttribute="leading" secondItem="Evm-f2-qJk" secondAttribute="trailing" constant="16" id="n79-aN-p8X"/>
                                                 <constraint firstItem="bIj-X0-EJ6" firstAttribute="top" secondItem="tLu-IG-s4A" secondAttribute="bottom" constant="8" symbolic="YES" id="pxn-Iy-TZ3"/>
-                                                <constraint firstItem="bfJ-Bc-q5m" firstAttribute="leading" secondItem="I1x-MJ-IzU" secondAttribute="leading" constant="20" symbolic="YES" id="zgD-TX-d4I"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -459,27 +460,81 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="image_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="6aG-oA-V4i" customClass="PFImageView">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="6aG-oA-V4i" customClass="PFImageView">
                                 <rect key="frame" x="30" y="88" width="128" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="ZYy-RI-yvG"/>
+                                    <constraint firstAttribute="width" constant="128" id="t7x-QS-XWp"/>
+                                </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Jose Castillo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IAX-Wg-yGg">
-                                <rect key="frame" x="46" y="236" width="97" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jose Castillo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IAX-Wg-yGg">
+                                <rect key="frame" x="46" y="236" width="298" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="0kb-0A-qNl">
+                                <rect key="frame" x="0.0" y="280" width="390" height="564"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="zLY-Nn-Cf9">
+                                    <size key="itemSize" width="130" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ImageCell" id="dNt-uG-MZ7" customClass="ImageCell">
+                                        <rect key="frame" x="0.0" y="0.0" width="129.66666666666663" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="CPc-DH-bia">
+                                            <rect key="frame" x="0.0" y="0.0" width="129.66666666666663" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="I3G-RS-Bpl" customClass="PFImageView">
+                                                    <rect key="frame" x="0.0" y="0.0" width="129.66666666666666" height="128"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="129.80000000000001" id="3GE-4B-hvY"/>
+                                                        <constraint firstAttribute="height" constant="128" id="YEs-Jp-6YR"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="I3G-RS-Bpl" secondAttribute="bottom" id="5aR-7l-5Og"/>
+                                                <constraint firstAttribute="trailing" secondItem="I3G-RS-Bpl" secondAttribute="trailing" id="EAQ-nh-a7V"/>
+                                                <constraint firstItem="I3G-RS-Bpl" firstAttribute="top" secondItem="CPc-DH-bia" secondAttribute="top" id="Eii-nt-Zo4"/>
+                                                <constraint firstItem="I3G-RS-Bpl" firstAttribute="leading" secondItem="CPc-DH-bia" secondAttribute="leading" id="TRS-Xu-Zci"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <connections>
+                                            <outlet property="imgView" destination="I3G-RS-Bpl" id="eN4-Dp-ZB6"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6hd-Dy-sQL"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="IAX-Wg-yGg" firstAttribute="top" secondItem="6aG-oA-V4i" secondAttribute="bottom" constant="20" id="1hB-zQ-8HB"/>
+                            <constraint firstItem="IAX-Wg-yGg" firstAttribute="leading" secondItem="6hd-Dy-sQL" secondAttribute="leading" constant="46" id="4fg-cF-IBE"/>
+                            <constraint firstItem="0kb-0A-qNl" firstAttribute="top" secondItem="IAX-Wg-yGg" secondAttribute="bottom" constant="23" id="N5y-sa-lam"/>
+                            <constraint firstAttribute="bottom" secondItem="0kb-0A-qNl" secondAttribute="bottom" id="On8-bV-81A"/>
+                            <constraint firstItem="6aG-oA-V4i" firstAttribute="leading" secondItem="6hd-Dy-sQL" secondAttribute="leading" constant="30" id="VYY-pR-tag"/>
+                            <constraint firstItem="6hd-Dy-sQL" firstAttribute="trailing" secondItem="IAX-Wg-yGg" secondAttribute="trailing" constant="46" id="jp3-HG-VA2"/>
+                            <constraint firstItem="0kb-0A-qNl" firstAttribute="trailing" secondItem="6hd-Dy-sQL" secondAttribute="trailing" id="kM9-zc-GAP"/>
+                            <constraint firstItem="0kb-0A-qNl" firstAttribute="leading" secondItem="6hd-Dy-sQL" secondAttribute="leading" id="lQw-MN-xvy"/>
+                            <constraint firstItem="6hd-Dy-sQL" firstAttribute="trailing" secondItem="6aG-oA-V4i" secondAttribute="trailing" constant="232" id="n8l-O9-rz1"/>
+                            <constraint firstItem="6aG-oA-V4i" firstAttribute="top" secondItem="6hd-Dy-sQL" secondAttribute="top" id="pK9-Tg-gBQ"/>
+                        </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="jdx-MK-f7N" appends="YES" id="zAp-pY-zhS"/>
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="KJe-Yh-Jjw"/>
                     <connections>
+                        <outlet property="collectionView" destination="0kb-0A-qNl" id="Sij-8E-2hw"/>
+                        <outlet property="flowLayout" destination="zLY-Nn-Cf9" id="gtb-sJ-MTa"/>
                         <outlet property="imgView" destination="6aG-oA-V4i" id="GTf-zC-Xj0"/>
                         <outlet property="userLabel" destination="IAX-Wg-yGg" id="RfY-AO-obq"/>
                     </connections>
