@@ -14,10 +14,12 @@
 #import "ProfileViewController.h"
 #import <Parse/Parse.h>
 
-@interface HomeFeedViewController () <UITableViewDataSource, UITableViewDelegate, ComposeViewControllerDelegate, PostCellDelegate>
+@interface HomeFeedViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, ComposeViewControllerDelegate, PostCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSArray *arrayOfPosts;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
+@property BOOL isMoreDataLoading;
+@property int initialQueryLimit;
 @end
 
 @implementation HomeFeedViewController
@@ -28,6 +30,7 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.initialQueryLimit = 20;
     [self query];
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(query) forControlEvents:UIControlEventValueChanged];
@@ -41,7 +44,30 @@
     [postQuery includeKey:@"image"];
     [postQuery includeKey:@"caption"];
     [postQuery includeKey:@"createdAt"];
-    postQuery.limit = 20;
+    postQuery.limit = self.initialQueryLimit;
+
+    // fetch data asynchronously
+    [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
+        if (posts) {
+            NSLog(@"Succesfully retrieved posts");
+            self.arrayOfPosts = posts;
+            [self.tableView reloadData];
+            [self.refreshControl endRefreshing];
+        }
+        else {
+            NSLog(@"Error getting posts: %@", error.localizedDescription);
+        }
+    }];
+}
+
+- (void)queryWithLimit:(int)limit {
+    PFQuery *postQuery = [Post query];
+    [postQuery orderByDescending:@"createdAt"];
+    [postQuery includeKey:@"author"];
+    [postQuery includeKey:@"image"];
+    [postQuery includeKey:@"caption"];
+    [postQuery includeKey:@"createdAt"];
+    postQuery.limit = limit;
 
     // fetch data asynchronously
     [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
@@ -89,6 +115,21 @@
 
 - (void)postCell:(InstagramPostTableViewCell *) postCell didTap: (Post *)post {
     [self performSegueWithIdentifier:@"profileSegue" sender:post];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if(!self.isMoreDataLoading) {
+        // Calculate the position of one screen length before the bottom of the results
+        int scrollViewContentHeight = self.tableView.contentSize.height;
+        int scrollOffsetThreshold = scrollViewContentHeight - self.tableView.bounds.size.height;
+        
+        // When the user has scrolled past the threshold, start requesting
+        if(scrollView.contentOffset.y > scrollOffsetThreshold && self.tableView.isDragging) {
+            self.isMoreDataLoading = true;
+            self.initialQueryLimit += 20;
+            [self queryWithLimit:self.initialQueryLimit];
+        }
+    }
 }
 
 #pragma mark - Navigation
