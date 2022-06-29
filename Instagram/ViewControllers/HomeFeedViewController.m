@@ -88,7 +88,6 @@
 }
 
 - (void)postCell:(InstagramPostTableViewCell *) postCell didTap: (Post *)post {
-    NSLog(@"HomeFeed");
     [self performSegueWithIdentifier:@"profileSegue" sender:post];
 }
 

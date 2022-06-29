@@ -13,9 +13,12 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    UITapGestureRecognizer *profileTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didTapUserProfile:)];
-    [self.profileImageView addGestureRecognizer:profileTapGestureRecognizer];
-    [self.userLabel addGestureRecognizer:profileTapGestureRecognizer];
+    UITapGestureRecognizer *profileTapGestureRecognizerImg = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didTapUserProfile:)];
+    [self.profileImageView addGestureRecognizer:profileTapGestureRecognizerImg];
+    [self.profileImageView setUserInteractionEnabled:YES];
+    UITapGestureRecognizer *profileTapGestureRecognizerLabel = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didTapUserProfile:)];
+    [self.userLabel addGestureRecognizer:profileTapGestureRecognizerLabel];
+    [self.userLabel setUserInteractionEnabled:YES];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -28,7 +31,6 @@
     UIImagePickerController *imagePickerVC = [UIImagePickerController new];
     imagePickerVC.delegate = self;
     imagePickerVC.allowsEditing = YES;
-    NSLog(@"Did tap");
 }
 
 - (void)setPost:(Post *)post {
@@ -58,7 +60,6 @@
 }
 
 -(void)didTapUserProfile:(UITapGestureRecognizer *)sender {
-    NSLog(@"DidTap");
     [self.delegate postCell:self didTap:self.post];
 }
 
@@ -71,9 +72,6 @@
     likes += 1;
     self.post.likeCount = [NSNumber numberWithInt:likes];
     [self.post saveInBackground];
-    
-    // [PFUser.currentUser setObject:self.arrayOfLikes forKey:@"arrayOfLikes"];
-    // [PFUser.currentUser saveInBackground];
     [self.likeButton setImage:[UIImage systemImageNamed:@"heart.fill"] forState:UIControlStateNormal];
 }
 
