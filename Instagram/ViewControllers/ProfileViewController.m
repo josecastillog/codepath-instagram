@@ -17,7 +17,6 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UICollectionViewFlowLayout *flowLayout;
 @property (strong, nonatomic) NSArray *arrayOfPosts;
-@property (strong, nonatomic) PFUser *user;
 @end
 
 @implementation ProfileViewController
@@ -37,32 +36,15 @@
     self.imgView.layer.borderWidth = 0;
     self.imgView.clipsToBounds = YES;
     self.userLabel.text = PFUser.currentUser.username;
-    [self profileImageQuery];
+    [self setProfileImage];
     [self userPostsQuery];
 }
 
 - (void)setProfileImage {
-    if (self.user[@"profileImage"]) {
-        self.imgView.file = self.user[@"profileImage"];
+    if (PFUser.currentUser[@"profileImage"]) {
+        self.imgView.file = PFUser.currentUser[@"profileImage"];
         [self.imgView loadInBackground];
     }
-}
-
-- (void)profileImageQuery {
-    PFQuery *userQuery = [PFUser query];
-    [userQuery getObjectWithId:PFUser.currentUser.objectId];
-    [userQuery includeKey:@"username"];
-    [userQuery includeKey:@"profileImage"];
-    
-    [userQuery findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
-        if (error) {
-            NSLog(@"Error getting user: %@", error.localizedDescription);
-        } else {
-            NSLog(@"Succesfully retrieved user");
-            self.user = objects[0];
-            [self setProfileImage];
-        }
-    }];
 }
 
 -(void)userPostsQuery {
@@ -128,8 +110,8 @@
 
     // Do something with the images (based on your use case)
     [self.imgView setImage:editedImage];
-    [self.user setObject:[self getPFFileFromImage:editedImage] forKey:@"profileImage"];
-    [self.user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+    [PFUser.currentUser setObject:[self getPFFileFromImage:editedImage] forKey:@"profileImage"];
+    [PFUser.currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (error) {
             NSLog(@"Error uploading image: %@", error.localizedDescription);
         }
