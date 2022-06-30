@@ -27,7 +27,7 @@
                                 <textInputTraits key="textInputTraits" textContentType="username"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IXb-FM-S6g">
-                                <rect key="frame" x="274" y="480" width="69" height="31"/>
+                                <rect key="frame" x="274" y="434" width="69" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="zVF-Bv-wi6"/>
                                 </constraints>
@@ -37,17 +37,8 @@
                                     <action selector="registerUser:" destination="2zt-YZ-YDW" eventType="touchUpInside" id="Z95-F5-ppi"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JUW-Ub-9sz">
-                                <rect key="frame" x="47" y="361" width="296" height="34"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="296" id="dHa-Sd-OIK"/>
-                                    <constraint firstAttribute="height" constant="34" id="wTK-4W-vGe"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" textContentType="email"/>
-                            </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2pa-uT-Ety">
-                                <rect key="frame" x="47" y="405" width="296" height="34"/>
+                                <rect key="frame" x="47" y="359" width="296" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="296" id="2lF-rJ-dAg"/>
                                     <constraint firstAttribute="height" constant="34" id="TWX-NK-sXH"/>
@@ -56,7 +47,7 @@
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nfE-Va-pTa">
-                                <rect key="frame" x="47" y="480" width="59.333333333333343" height="31"/>
+                                <rect key="frame" x="47" y="434" width="59.333333333333343" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Login"/>
                                 <connections>
@@ -79,20 +70,16 @@
                             <constraint firstItem="1we-Yd-WxN" firstAttribute="leading" secondItem="oWQ-ia-E39" secondAttribute="leading" constant="47" id="GJv-9C-3pW"/>
                             <constraint firstItem="IXb-FM-S6g" firstAttribute="centerY" secondItem="nfE-Va-pTa" secondAttribute="centerY" id="Gxi-nu-GuM"/>
                             <constraint firstItem="oWQ-ia-E39" firstAttribute="trailing" secondItem="1we-Yd-WxN" secondAttribute="trailing" constant="47" id="IQr-Hg-pNm"/>
-                            <constraint firstItem="2pa-uT-Ety" firstAttribute="top" secondItem="JUW-Ub-9sz" secondAttribute="bottom" constant="10" id="R7i-ke-fNF"/>
                             <constraint firstItem="nfE-Va-pTa" firstAttribute="leading" secondItem="oWQ-ia-E39" secondAttribute="leading" constant="47" id="RCV-3N-gtE"/>
+                            <constraint firstItem="2pa-uT-Ety" firstAttribute="top" secondItem="1we-Yd-WxN" secondAttribute="bottom" constant="6" id="WVa-vX-mIc"/>
                             <constraint firstItem="oWQ-ia-E39" firstAttribute="trailing" secondItem="IXb-FM-S6g" secondAttribute="trailing" constant="47" id="bvd-rK-Vje"/>
-                            <constraint firstItem="JUW-Ub-9sz" firstAttribute="top" secondItem="1we-Yd-WxN" secondAttribute="bottom" constant="8" symbolic="YES" id="dr2-U3-L2F"/>
                             <constraint firstItem="oWQ-ia-E39" firstAttribute="trailing" secondItem="o5O-nG-2SB" secondAttribute="trailing" constant="96" id="hdw-dD-XYi"/>
                             <constraint firstItem="nfE-Va-pTa" firstAttribute="top" secondItem="2pa-uT-Ety" secondAttribute="bottom" constant="41" id="lCg-mL-BNO"/>
-                            <constraint firstItem="oWQ-ia-E39" firstAttribute="trailing" secondItem="JUW-Ub-9sz" secondAttribute="trailing" constant="47" id="mMV-lV-682"/>
                             <constraint firstItem="o5O-nG-2SB" firstAttribute="leading" secondItem="oWQ-ia-E39" secondAttribute="leading" constant="96" id="p1d-Xb-GtV"/>
-                            <constraint firstItem="JUW-Ub-9sz" firstAttribute="leading" secondItem="oWQ-ia-E39" secondAttribute="leading" constant="47" id="tif-j4-P09"/>
                             <constraint firstItem="oWQ-ia-E39" firstAttribute="trailing" secondItem="2pa-uT-Ety" secondAttribute="trailing" constant="47" id="xxW-Kf-rLm"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="emailField" destination="JUW-Ub-9sz" id="fFJ-2o-bBA"/>
                         <outlet property="passwordField" destination="2pa-uT-Ety" id="x8y-K7-g8m"/>
                         <outlet property="usernameField" destination="1we-Yd-WxN" id="ede-xR-kHP"/>
                         <segue destination="jvd-yc-cXf" kind="presentation" identifier="homeSegue" id="EMe-rg-Kag"/>
