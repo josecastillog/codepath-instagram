@@ -41,7 +41,7 @@ Please list two areas of the assignment you'd like to **discuss further with you
 
 Here's a walkthrough of implemented user stories:
 
-![](https://media.giphy.com/media/k9TwCnRGctNSLuQr9g/giphy.gif)
+![](https://media.giphy.com/media/JjAuMlM4JAAIbAwixV/giphy.gif)
 
 ## Credits
 
