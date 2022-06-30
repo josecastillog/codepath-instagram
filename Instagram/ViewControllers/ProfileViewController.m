@@ -57,7 +57,6 @@
     [postQuery includeKey:@"image"];
     [postQuery includeKey:@"caption"];
     [postQuery includeKey:@"createdAt"];
-    // postQuery.limit = 20;
 
     // fetch data asynchronously
     [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
@@ -108,10 +107,8 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
     
     // Get the image captured by the UIImagePickerController
-    // UIImage *originalImage = info[UIImagePickerControllerOriginalImage];
     UIImage *editedImage = info[UIImagePickerControllerEditedImage];
 
-    // Do something with the images (based on your use case)
     [self.imgView setImage:editedImage];
     [self.user setObject:[self getPFFileFromImage:editedImage] forKey:@"profileImage"];
     [self.user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {

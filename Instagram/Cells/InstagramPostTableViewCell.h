@@ -15,15 +15,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface InstagramPostTableViewCell : UITableViewCell <UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *captionLabel;
-@property (strong, nonatomic) IBOutlet PFImageView *photoImageView;
-@property (strong, nonatomic) IBOutlet PFImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *timestampLabel;
 @property (weak, nonatomic) IBOutlet UILabel *likesLabel;
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
-@property (strong, nonatomic) Post *post;
-@property (strong, nonatomic) NSArray *arrayOfLikedPosts;
 @property (weak, nonatomic) IBOutlet UILabel *userLabel;
 @property (weak, nonatomic) id<PostCellDelegate> delegate;
+@property (strong, nonatomic) Post *post;
+@property (strong, nonatomic) NSArray *arrayOfLikedPosts;
+@property (strong, nonatomic) IBOutlet PFImageView *photoImageView;
+@property (strong, nonatomic) IBOutlet PFImageView *profileImageView;
 @property BOOL liked;
 @end
 
