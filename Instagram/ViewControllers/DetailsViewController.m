@@ -47,6 +47,8 @@
     NSString *date = [NSDate shortTimeAgoSinceDate:self.post.createdAt];
     NSString *dateFormated = [date stringByAppendingString:@" ago"];
     self.timestampLabel.text = dateFormated;
+    NSString *likeCount = [NSString stringWithFormat:@"%@", self.post.likeCount];;
+    self.likeLabel.text = [@"Liked by " stringByAppendingString:likeCount];
 }
 
 
