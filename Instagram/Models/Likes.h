@@ -9,8 +9,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Likes : PFObject
-
+@interface Likes : PFObject<PFSubclassing>
+@property (nonatomic, strong) NSString *postID;
+@property (nonatomic, strong) PFUser *userThatLiked;
 @end
 
 NS_ASSUME_NONNULL_END

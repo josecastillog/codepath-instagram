@@ -7,6 +7,7 @@
 
 #import "InstagramPostTableViewCell.h"
 #import "DateTools.h"
+#import "Likes.h"
 
 @implementation InstagramPostTableViewCell
 
@@ -21,9 +22,27 @@
     [self.userLabel setUserInteractionEnabled:YES];
 }
 
+- (void)setLikeStatus {
+    self.liked = NO;
+    for (NSDictionary *dictionary in self.arrayOfLikedPosts) {
+        NSString *likedPostID = dictionary[@"postID"];
+        if ([self.post.objectId isEqualToString:likedPostID]){
+            self.liked = YES;
+        }
+    }
+    [self setLikeButtonImage];
+}
+
+- (void)setLikeButtonImage {
+    if (self.liked == YES) {
+        [self.likeButton setImage:[UIImage systemImageNamed:@"heart.fill"] forState:UIControlStateNormal];
+    } else {
+        [self.likeButton setImage:[UIImage systemImageNamed:@"heart"] forState:UIControlStateNormal];
+    }
+}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
     // Configure the view for the selected state
 }
 
@@ -45,6 +64,7 @@
     self.timestampLabel.text = dateFormated;
     [self.photoImageView loadInBackground];
     [self setProfileImage];
+    [self setLikeStatus];
 }
 
 - (void)setProfileImage {
@@ -64,15 +84,37 @@
 }
 
 - (IBAction)didTapLike:(id)sender {
-    NSLog(@"Tapped like");
-    NSLog(@"%@", self.post.objectId);
-    [self.arrayOfLikes arrayByAddingObject:self.post.objectId];
-    
     int likes = [self.post.likeCount intValue];
-    likes += 1;
+    if (self.liked == NO) {
+        self.liked = YES;
+        [self.likeButton setImage:[UIImage systemImageNamed:@"heart.fill"] forState:UIControlStateNormal];
+        Likes *likedPost = [Likes new];
+        [likedPost setObject:self.post.objectId forKey:@"postID"];
+        [likedPost setObject:PFUser.currentUser forKey:@"userThatLiked"];
+        [likedPost saveInBackground];
+        likes += 1;
+    } else {
+        self.liked = NO;
+        [self.likeButton setImage:[UIImage systemImageNamed:@"heart"] forState:UIControlStateNormal];
+        PFQuery *likesQuery = [Likes query];
+        [likesQuery includeKey:@"postID"];
+        [likesQuery includeKey:@"userThatLiked"];
+        [likesQuery whereKey:@"userThatLiked" equalTo:PFUser.currentUser];
+        [likesQuery whereKey:@"postID" equalTo:self.post.objectId];
+        likes -= 1;
+        [likesQuery findObjectsInBackgroundWithBlock:^(NSArray<Likes *> * _Nullable likes, NSError * _Nullable error) {
+            if (likes.count > 0) {
+                [likes[0] deleteEventually];
+            }
+            else {
+                NSLog(@"Error deleting: %@", error.localizedDescription);
+            }
+        }];
+    }
     self.post.likeCount = [NSNumber numberWithInt:likes];
+    NSString *likeCount = [NSString stringWithFormat:@"%@", self.post.likeCount];;
+    self.likesLabel.text = [@"Liked by " stringByAppendingString:likeCount];
     [self.post saveInBackground];
-    [self.likeButton setImage:[UIImage systemImageNamed:@"heart.fill"] forState:UIControlStateNormal];
 }
 
 @end

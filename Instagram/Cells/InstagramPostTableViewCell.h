@@ -21,9 +21,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *likesLabel;
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
 @property (strong, nonatomic) Post *post;
-@property (strong, nonatomic) NSArray *arrayOfLikes;
+@property (strong, nonatomic) NSArray *arrayOfLikedPosts;
 @property (weak, nonatomic) IBOutlet UILabel *userLabel;
 @property (weak, nonatomic) id<PostCellDelegate> delegate;
+@property BOOL liked;
 @end
 
 @protocol PostCellDelegate

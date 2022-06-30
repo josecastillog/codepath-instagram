@@ -9,4 +9,11 @@
 
 @implementation Likes
 
+@dynamic postID;
+@dynamic userThatLiked;
+
++ (nonnull NSString *)parseClassName {
+    return @"Likes";
+}
+
 @end

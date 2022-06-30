@@ -120,9 +120,10 @@
                                                         <constraint firstAttribute="height" constant="22" id="UVG-h9-HKj"/>
                                                         <constraint firstAttribute="width" constant="22" id="o3V-4b-ESl"/>
                                                     </constraints>
-                                                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="plain" image="heart" catalog="system" title=""/>
+                                                    <buttonConfiguration key="configuration" style="plain" image="heart" catalog="system" title="">
+                                                        <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </buttonConfiguration>
                                                     <connections>
                                                         <action selector="didTapLike:" destination="C4A-ie-t08" eventType="touchUpInside" id="7y2-fa-Y8l"/>
                                                     </connections>
@@ -446,6 +447,7 @@
                     <connections>
                         <outlet property="captionField" destination="2wm-rG-A7K" id="6fj-Rw-MZU"/>
                         <outlet property="imgView" destination="3BY-YS-rfW" id="eWO-RV-07V"/>
+                        <outlet property="shareButton" destination="C6M-D2-8GO" id="1y9-mO-EXW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fgz-VX-mGd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

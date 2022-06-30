@@ -7,10 +7,12 @@
 
 #import "ComposeViewController.h"
 #import "Post.h"
+#import "MBProgressHUD.h"
 
 @interface ComposeViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate, UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imgView;
 @property (weak, nonatomic) IBOutlet UITextView *captionField;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *shareButton;
 @property (strong, nonatomic) UIImage *uploadImage;
 @property (strong, nonatomic) NSArray *arrayOfLikes;
 @end
@@ -65,7 +67,8 @@
 
 - (IBAction)didTapShare:(id)sender {
     NSString *caption = self.captionField.text;
-    
+    [MBProgressHUD showHUDAddedTo:self.view animated:TRUE];
+    self.shareButton.enabled = false;
     [Post postUserImage:self.uploadImage withCaption:caption withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if (error) {
             NSLog(@"Error posting: %@", error.localizedDescription);
@@ -73,6 +76,7 @@
             NSLog(@"Successfully uploaded image");
             [self.delegate didPost];
             [self dismissViewControllerAnimated:YES completion:nil];
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
         }
     }];
 }

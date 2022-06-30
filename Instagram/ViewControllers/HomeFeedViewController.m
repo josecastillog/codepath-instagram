@@ -9,6 +9,7 @@
 #import "InstagramPostTableViewCell.h"
 #import "SceneDelegate.h"
 #import "Post.h"
+#import "Likes.h"
 #import "DetailsViewController.h"
 #import "ComposeViewController.h"
 #import "ProfileViewController.h"
@@ -18,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSArray *arrayOfPosts;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
+@property (strong, nonatomic) NSArray *arrayOfLikedPosts;
 @property BOOL isMoreDataLoading;
 @property int initialQueryLimit;
 @end
@@ -51,8 +53,7 @@
         if (posts) {
             NSLog(@"Succesfully retrieved posts");
             self.arrayOfPosts = posts;
-            [self.tableView reloadData];
-            [self.refreshControl endRefreshing];
+            [self likedPostsQuery];
         }
         else {
             NSLog(@"Error getting posts: %@", error.localizedDescription);
@@ -83,6 +84,25 @@
     }];
 }
 
+- (void)likedPostsQuery {
+    PFQuery *likesQuery = [Likes query];
+    [likesQuery includeKey:@"postID"];
+    [likesQuery includeKey:@"userThatLiked"];
+    [likesQuery whereKey:@"userThatLiked" equalTo:PFUser.currentUser];
+
+    // fetch data asynchronously
+    [likesQuery findObjectsInBackgroundWithBlock:^(NSArray<Likes *> * _Nullable likes, NSError * _Nullable error) {
+        if (likes) {
+            self.arrayOfLikedPosts = likes;
+            [self.tableView reloadData];
+            [self.refreshControl endRefreshing];
+        }
+        else {
+            NSLog(@"Error getting liked posts: %@", error.localizedDescription);
+        }
+    }];
+}
+
 - (IBAction)didTaplogout:(id)sender {
     [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
         if (error) {
@@ -105,6 +125,7 @@
                                                                  forIndexPath:indexPath];
     Post *post = self.arrayOfPosts[indexPath.row];
     cell.delegate = self;
+    cell.arrayOfLikedPosts = self.arrayOfLikedPosts;
     [cell setPost:post];
     return cell;
 }
